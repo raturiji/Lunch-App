@@ -17,12 +17,13 @@ export default function Order(user) {
         Price: add,
         Date : moment().format('DD MMM, YYYY')  
       }
-      firebase.database().ref("Order").push(order);
+
+      firebase.database().ref("Order/"+ user.user.displayName).push(order);
       setSum(add)
     }
    
   };
-  console.log(sum);
+  // moment().tz("Asia/Kolkata").format();)
   return (
     <div className="box shadow py-3 px-5">
       {sum === 0 ? (
@@ -51,7 +52,7 @@ export default function Order(user) {
           </div>
           <button
             type="button"
-            class="btn btn-primary px-3 my-3 w-100"
+            className="btn btn-primary px-3 my-3 w-100"
             onClick={() => handleSubmit()}
           >
             Submit

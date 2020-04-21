@@ -1,58 +1,72 @@
 import React , {useState, useEffect} from 'react'
 import firebase from "firebase";
 
-export default function History() {
+export default function History(user) {
   const [data,setData] = useState(null)
+  const [price,setPrice] = useState(0)
 
-  useEffect(() => {
-    readUserData();
+  useEffect( () => {
+     readUserData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   const readUserData = () => {
     firebase
       .database()
-      .ref("Order/")
+      .ref("Order/"+ user.user.displayName)
       .on("value", function (snapshot) {
-        setData(snapshot.val());
+        const dataArray = [];
+        let prices = 0
+        for(const property in snapshot.val()){  
+              dataArray.push(snapshot.val()[property])
+               prices = prices + snapshot.val()[property].Price
+               console.log(prices)
+          }
+          setPrice(prices)
+        setData(dataArray);
       });
   };
 
-  const displayData = () => {
-    let dataArray = [] 
-    for(const property in data){
-      dataArray.push(data[property])
-    }
-    dataArray.map(item => <tr>item.Id</tr>)
-  }
+  // const displayData = () => {
+  //   let dataArray = [] 
+  //   let price = 0
+  //   for(const property in data){
+      
+  //     dataArray.push(data[property])
+  //     price = price + data[property].Price
+  //   }
+
+  // return dataArray.map(item => <tr>
+  //    <td>{item.User}</td>
+  //    <td>{item.Date}</td>
+  //    <td>{item.Price}</td>
+  //  </tr>)
+  // }
+  console.log(data)
+  
   return (
     <div className="w-75">
-      <h1 className="text-center">History</h1>
-      <h1>{displayData()}</h1>
-      <table class="table table-striped">
+      <h1 className="text-center">Order History</h1>
+      <table className="table table-striped">
     <thead>
       <tr>
         <th>Name</th>
         <th>Date</th>
-        <th>Price </th>
+        <th>Price(Rs.{price===0 ? 0 : price}) </th>
       </tr>
-    
+      
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
+      {data!==null ?data.map(item => <tr key={item.key}>
+      <td>{item.User}</td>
+      <td>{item.Date}</td>
+      <td>{item.Price}</td>
+   </tr>)
+   :  <tr>
+   <td>Fetching Name</td>
+   <td>Fetching Data</td>
+   <td>Fetching Price}</td>
+</tr>}
     </tbody>
   </table>
     </div>

@@ -6,10 +6,8 @@ import Dashboard from './component/Dashboard'
 import firebaseConfig from './assets/config'
 
 const App = () => {
-
   const [user,setUser] = useState(null);
   const [signIn,setSignIn] = useState(false);
-
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       setUser(user);
