@@ -2,7 +2,7 @@ import React from "react";
 
 
 
-const Header = () => {
+const Header = (user) => {
   
   return (
     <div className="header bg-success d-flex justify-content-between align-items-center">

@@ -5,13 +5,13 @@ import Main from "./Main";
 
 
 const Dashboard = (user) => {
-  
+  console.log(user.user.email)
   return (
     <div className="Dashboard d-flex align-items-center flex-column justify-content-center">
-        <Header />
+        <Header user={user} />
         <div className="dashboard-content d-flex  w-100">
             <SideBar />
-            <Main />
+            <Main user={user}/>
         </div>
     </div>
   );

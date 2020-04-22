@@ -23,22 +23,15 @@ const App = () => {
     firebase.initializeApp(firebaseConfig);
   }
 
-  const uiConfig = {
-    signInFlow: "popup",
-    signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    ],
-    callbacks: {
-      signInSuccess: () => false,
-    },
-  };
-
+  
+  
+  
+console.log(signIn)
   return (
     <div className="App">
-    {/* {signIn ? <Dashboard user={user} />: <Landing uiConfig={uiConfig} /> }  */
-  
-    }
-    <Dashboard user={user} />
+     {signIn ? <Dashboard user={user} />: <Landing /> }  
+
+
     </div>
   );
 }
