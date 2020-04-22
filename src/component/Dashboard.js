@@ -14,7 +14,7 @@ const Dashboard = ({ user }) => {
         <button className=" btn btn-primary mx-3 px-3" onClick={() => setToggle(1)}>Order Lunch</button>
         <button className=" btn btn-primary mx-3 px-3" onClick={() => setToggle(2)} >View History</button>
       </div>
-      {toggle === 1 ? <Order/> : null}
+      {toggle === 1 ? <Order user={user}/> : null}
       {toggle === 2 ? <History /> : null}
     </div>
   );
