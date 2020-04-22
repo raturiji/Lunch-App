@@ -1,18 +1,21 @@
-import React from "react";
-import Header from './Header'
-import SideBar from "./SideBar";
-import Main from "./Main";
+import React,{useState} from "react";
+import Header from './Header';
+import firebase from 'firebase';
+import Order from "./Order";
+import History from "./History";
 
+const Dashboard = ({ user }) => {
+  const [toggle,setToggle]=useState(0);
 
-const Dashboard = (user) => {
-  console.log(user.user.email)
   return (
     <div className="Dashboard d-flex align-items-center flex-column justify-content-center">
-        <Header user={user} />
-        <div className="dashboard-content d-flex  w-100">
-            <SideBar />
-            <Main user={user}/>
-        </div>
+      <Header src={user && user.photoURL} name={user && user.displayName} onClick={() => firebase.auth().signOut()} />
+      <div className="d-flex my-4">
+        <button className=" btn btn-primary mx-3 px-3" onClick={() => setToggle(1)}>Order Lunch</button>
+        <button className=" btn btn-primary mx-3 px-3" onClick={() => setToggle(2)} >View History</button>
+      </div>
+      {toggle === 1 ? <Order/> : null}
+      {toggle === 2 ? <History /> : null}
     </div>
   );
 };

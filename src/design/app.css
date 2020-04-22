@@ -1,49 +1,25 @@
-h3{
-    font-family: 'Acme', sans-serif;
+.landing {
+  background: url('https://adilfoods.com/wp-content/uploads/2016/03/slide-2.jpg')
+    no-repeat center;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
 }
 
-.landing{
-    background-image: url('../assets/lunch.jpg') ;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width:100%;
-    height:100%;
-    position:fixed;
-}
-.landing button {
-    margin: auto;
+.banner {
+  background: url('https://pngimage.net/wp-content/uploads/2018/06/food-pattern-png.png');
+  background-size: 400px;
 }
 
-.header{
-    height:70px;
-    width:100%;
+.header {
+  height: 70px;
+  width: 100%;
+}
+.profile {
+  width: 30px;
+  height: 30px;
 }
 
-.sidebar{
-    width:200px;
-    background-color: #003153 ;
-}
-
-.sidebar ul{
-    list-style: none;
-    color:#e3e3e3;
-    padding-left:20px;
-}
-
- a{
-    color:white;
-    text-decoration: none;
-}
-
-
-.main{
-    height:100%;
-    width:100%;
-    background-color: #e3e3e3;
-}
-
-.dashboard-content {
-    height:90%;
-    position: absolute;
-    top:70px;
+.box {
+  margin-top: 100px;
 }

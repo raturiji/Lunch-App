@@ -11,12 +11,14 @@ const Landing = () => {
     },
   };
   return (
-    <div className="landing d-flex align-items-center flex-column justify-content-center">
-        <h1 className="text-white ">Have Lunch</h1>
-      <StyledFirebaseAuth 
-         uiConfig={uiConfig}
-         firebaseAuth={firebase.auth()}
-      />
+    <div className="landing d-flex">
+      <div className="bg-white w-50  d-flex justify-content-center align-items-center flex-column banner">
+        <h1 className="font-weight-bold">Order Lunch</h1>
+        <StyledFirebaseAuth
+          uiConfig={uiConfig}
+          firebaseAuth={firebase.auth()}
+        />
+      </div>
     </div>
   );
 };

@@ -5,7 +5,6 @@ import Landing from './component/Landing'
 import Dashboard from './component/Dashboard'
 import firebaseConfig from './assets/config'
 
-
 const App = () => {
 
   const [user,setUser] = useState(null);
@@ -13,9 +12,8 @@ const App = () => {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
-      console.log(user)
-      setSignIn(!!user);
       setUser(user);
+      setSignIn(!!user);
     });
   }, []);
 
@@ -23,15 +21,9 @@ const App = () => {
     firebase.initializeApp(firebaseConfig);
   }
 
-  
-  
-  
-console.log(signIn)
   return (
     <div className="App">
-     {signIn ? <Dashboard user={user} />: <Landing /> }  
-
-
+      {signIn ? <Dashboard user={user} />: <Landing /> }
     </div>
   );
 }
