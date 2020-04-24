@@ -8874,6 +8874,11 @@ react-firebaseui@^4.1.0:
   dependencies:
     firebaseui "^4.1.0"
 
+react-heatmap-grid@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/react-heatmap-grid/-/react-heatmap-grid-0.8.1.tgz#ab24e425534b7dbec58d41c3abdf9e7e7edc6a02"
+  integrity sha512-reDkqNwfzcUCZlpp1ld2IRakmbDqSNuhY3EQ0eeDUP/xe6siwagyM4fCN+OFZyeWSlyFVfeq6LuQITbo5zvbdw==
+
 react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"

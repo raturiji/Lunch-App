@@ -3,7 +3,7 @@ import Header from './Header';
 import firebase from 'firebase';
 import Order from "./Order";
 import History from "./History";
-import Grid from "./Grid";
+import AdminDashboard from './AdminDashboard';
 
 const Dashboard = ({ user }) => {
   const [toggle,setToggle]=useState(0);
@@ -14,11 +14,11 @@ const Dashboard = ({ user }) => {
       <div className="d-flex my-4">
         <button className=" btn btn-primary mx-3 px-3" onClick={() => setToggle(1)}>Order Lunch</button>
         <button className=" btn btn-primary mx-3 px-3" onClick={() => setToggle(2)} >View History</button>
-        <button className=" btn btn-primary mx-3 px-3" onClick={() => setToggle(3)} >Grid</button>
+        <button className=" btn btn-primary mx-3 px-3" onClick={() => setToggle(3)} >Admin Dashboard</button>
       </div>
       {toggle === 1 ? <Order user={user}/> : null}
       {toggle === 2 ? <History  user={user}/> : null}
-      {toggle === 3 ? <Grid  user={user}/> : null}
+      {toggle === 3 ? <AdminDashboard user={user} /> : null}
     </div>
   );
 };

@@ -7,6 +7,7 @@ import firebaseConfig from './assets/config'
 
 const App = () => {
   const [user,setUser] = useState(null);
+  const [code,setCode]= useState();
   const [signIn,setSignIn] = useState(false);
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
