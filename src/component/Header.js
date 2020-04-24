@@ -1,5 +1,6 @@
 import React from "react";
 const Header = ({src,name,onClick}) => {
+  console.log(src)
   return (
     <div className="header bg-primary shadow d-flex justify-content-between align-items-center px-3">
       <h4 className="text-white">Order Lunch</h4>

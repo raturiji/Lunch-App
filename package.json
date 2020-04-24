@@ -11,6 +11,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-firebaseui": "^4.1.0",
+    "react-heatmap-grid": "^0.8.1",
     "react-scripts": "3.4.1"
   },
   "scripts": {
