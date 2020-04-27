@@ -1,6 +1,7 @@
 import React, { useState , useEffect } from "react";
 import moment from "moment";
 import firebase from "firebase";
+import axios from 'axios'
 import Loader from "./Loader"
 
 export default function Order(user) {
@@ -8,30 +9,37 @@ export default function Order(user) {
   const [lunch, setLunch] = useState(false);
   const [curd, setCurdValue] = useState(false);
   const [isOrdered, setIsOrdered] = useState(false);
-  const [loading,setLoading] = useState() 
+  const [currentDate,setCurrentDate] = useState("")
+  const [loading,setLoading] = useState(false) 
 
-  console.log(loading)
   useEffect( () => {
     readUserData();
    // eslint-disable-next-line react-hooks/exhaustive-deps 
  },[])
- 
  const readUserData = () => {
   setLoading(true)
+  let date
+  axios.get("http://worldtimeapi.org/api/timezone/Asia/Kolkata.txt")
+  .then(
+    (result) => {
+      date = moment(result.data.split("\n")[2].split(' ')[1]).format('DD MMM, YYYY')
+      setCurrentDate(date)
+  }
+  )
    firebase
      .database()
      .ref("Order/"+ user.user.displayName)
      .on("value", function (snapshot) {
-       for(const property in snapshot.val()){  
-          if(snapshot.val()[property].Date === moment().format('DD MMM, YYYY')  ){
+       for(const property in snapshot.val()){   
+          if(snapshot.val()[property].Date === date){
             setIsOrdered(true)
+            setLoading(false)
           } 
          }
      });
-  setLoading(false)
+  console.log(loading)
+
  };
-
-
 
   const handleSubmit = () => {
     const add = (lunch ? 50 : 0) + (curd ? 10 : 0);
@@ -40,7 +48,7 @@ export default function Order(user) {
         Id : user.user.refreshToken,
         User: user.user.displayName,
         Price: add,
-        Date : moment().format('DD MMM, YYYY')  
+        Date : currentDate
       }
       firebase.database().ref("Order/"+ user.user.displayName).push(order);
       setIsOrdered(true)
@@ -49,9 +57,8 @@ export default function Order(user) {
   };
 
   return (
-    
-    <div className="box shadow py-3 px-5">
-      {loading ? <Loader />:
+    <div className={loading ? "py-3 px-5" : "box shadow py-3 px-5"}>
+      {loading ? <Loader type={"miniLoader"} />:
       !isOrdered ? (
         <div>
           <h4 className="text-info">Order Today's Lunch</h4>

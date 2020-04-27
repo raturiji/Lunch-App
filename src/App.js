@@ -35,7 +35,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {signIn ? <Dashboard user={user} />: loading ?  <Loader /> : <Landing onclick={adminLogin} /> }
+      {signIn ? <Dashboard user={user} />: loading ?  <Loader type="fullscreen"/> : <Landing onclick={adminLogin} /> }
     </div>
   );
 }
