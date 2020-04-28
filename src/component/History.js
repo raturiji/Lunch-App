@@ -42,7 +42,7 @@ export default function History(user) {
   //    <td>{item.Price}</td>
   //  </tr>)
   // }
-  console.log(data)
+ 
   
   return (
     <div className="w-75">

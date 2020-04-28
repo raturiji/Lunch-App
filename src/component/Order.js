@@ -1,19 +1,37 @@
 import React, { useState , useEffect } from "react";
 import moment from "moment";
 import firebase from "firebase";
+import Loader from "./Loader"
 
 export default function Order(user) {
   const date = moment().format("DD MMM, YYYY");
   const [lunch, setLunch] = useState(false);
   const [curd, setCurdValue] = useState(false);
-  const [sum, setSum] = useState(0);
-  // const [isOrdered, setIsOrdered] = useState(false);
+  const [isOrdered, setIsOrdered] = useState(false);
+  const [loading,setLoading] = useState() 
 
-  useEffect(() => {
-    
-  },[])
+  console.log(loading)
+  useEffect( () => {
+    readUserData();
+   // eslint-disable-next-line react-hooks/exhaustive-deps 
+ },[])
+ 
+ const readUserData = () => {
+  setLoading(true)
+   firebase
+     .database()
+     .ref("Order/"+ user.user.displayName)
+     .on("value", function (snapshot) {
+       for(const property in snapshot.val()){  
+          if(snapshot.val()[property].Date === moment().format('DD MMM, YYYY')  ){
+            setIsOrdered(true)
+          } 
+         }
+     });
+  setLoading(false)
+ };
 
-  
+
 
   const handleSubmit = () => {
     const add = (lunch ? 50 : 0) + (curd ? 10 : 0);
@@ -24,16 +42,17 @@ export default function Order(user) {
         Price: add,
         Date : moment().format('DD MMM, YYYY')  
       }
-
       firebase.database().ref("Order/"+ user.user.displayName).push(order);
-      setSum(add)
+      setIsOrdered(true)
     }
    
   };
 
   return (
+    
     <div className="box shadow py-3 px-5">
-      {sum === 0 ? (
+      {loading ? <Loader />:
+      !isOrdered ? (
         <div>
           <h4 className="text-info">Order Today's Lunch</h4>
           <h5 className="text-center small font-weight-bold text-warning">

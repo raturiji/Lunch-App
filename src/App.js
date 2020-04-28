@@ -4,16 +4,20 @@ import firebase from "firebase";
 import Landing from './component/Landing'
 import Dashboard from './component/Dashboard'
 import firebaseConfig from './assets/config'
+import Loader from './component/Loader'
 
 const App = () => {
   const [user,setUser] = useState(null);
   const [signIn,setSignIn] = useState(false);
+  const [loading,setLoading] = useState(false)
 
 
   useEffect(() => {
+    setLoading(true)
     firebase.auth().onAuthStateChanged((user) => {
       setUser(user);
       setSignIn(!!user);
+    setLoading(false)
     });
   }, []);
 
@@ -31,7 +35,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {signIn ? <Dashboard user={user} />: <Landing onclick={adminLogin} /> }
+      {signIn ? <Dashboard user={user} />: loading ?  <Loader /> : <Landing onclick={adminLogin} /> }
     </div>
   );
 }
