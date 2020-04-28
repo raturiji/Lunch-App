@@ -2,9 +2,8 @@ import React,{useState} from "react";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
-const Landing = () => {
+const Landing = (onclick) => {
   const [loading,setLoading]=useState(false);
-  const [password, setPassword] = useState(false);
 
   const uiConfig = {
     signInFlow: "popup",
@@ -14,9 +13,11 @@ const Landing = () => {
     },
   };
 
-  const closeModal=()=>{
-    setLoading(!loading)
-    setPassword(password);
+  const handleClick = (event) => {
+    event.preventDefault()
+    // console.log(event.target.password.value)
+    onclick.onclick(event.target.password.value)
+    console.log(onclick)
   }
 
   return (
@@ -28,7 +29,13 @@ const Landing = () => {
           firebaseAuth={firebase.auth()}
         />
         <button className=" btn btn-primary mx-3 px-5 small" onClick={() => setLoading(true)}>Login as Admin</button>
-        {loading ? <div className="px-4 p-4 m-3 bg-white shadow d-flex flex-column justify-content-around"><input type="password" onChange={e=> setPassword(e.target.value)} maxlength="4"/>  <button className=" btn btn-primary m-3 px-5 btn-sm" onClick={() => closeModal()}>Submit</button> </div> : null}
+        {loading ? <div className="px-4 p-4 m-3 bg-white shadow d-flex flex-column justify-content-around">
+          <form onSubmit={handleClick}>
+          <input type="password" name="password" maxlength="5"/>  
+          <button className=" btn btn-primary m-3 px-5 btn-sm" type="submit">Submit</button>
+          </form>
+           </div> 
+          : null}      
       </div>
     </div>
   );

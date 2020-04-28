@@ -7,8 +7,9 @@ import firebaseConfig from './assets/config'
 
 const App = () => {
   const [user,setUser] = useState(null);
-  const [code,setCode]= useState();
   const [signIn,setSignIn] = useState(false);
+
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       setUser(user);
@@ -20,9 +21,17 @@ const App = () => {
     firebase.initializeApp(firebaseConfig);
   }
 
+  const adminLogin = (password) => {
+    if(password === 'admin'){
+      setSignIn(true)
+      setUser('admin')
+    }
+    
+  }
+
   return (
     <div className="App">
-      {signIn ? <Dashboard user={user} />: <Landing /> }
+      {signIn ? <Dashboard user={user} />: <Landing onclick={adminLogin} /> }
     </div>
   );
 }
