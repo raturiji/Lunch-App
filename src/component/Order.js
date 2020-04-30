@@ -18,11 +18,11 @@ export default function Order(user) {
  },[])
  const readUserData = () => {
   setLoading(true)
-  let date
-  axios.get("http://worldtimeapi.org/api/timezone/Asia/Kolkata.txt")
+ 
+   axios.get("http://worldtimeapi.org/api/timezone/Asia/Kolkata.txt")
   .then(
     (result) => {
-      date = moment(result.data.split("\n")[2].split(' ')[1]).format('DD MMM, YYYY')
+      const date = moment(result.data.split("\n")[2].split(' ')[1]).format('DD MMM, YYYY')
       setCurrentDate(date)
   }
   )
@@ -31,14 +31,17 @@ export default function Order(user) {
      .ref("Order/"+ user.user.displayName)
      .on("value", function (snapshot) {
        for(const property in snapshot.val()){   
+         console.log(date)
           if(snapshot.val()[property].Date === date){
+            console.log('working')
             setIsOrdered(true)
-            setLoading(false)
           } 
-         }
-     });
+        }
+        setLoading(false)   
+     }
+     
+     );
   console.log(loading)
-
  };
 
   const handleSubmit = () => {
