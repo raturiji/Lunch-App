@@ -48,7 +48,7 @@ export default function History(user) {
 
   console.log(gridUser)
   return (
-    <div className="w-75">
+    <div className="w-100">
       <h1 className="text-center">Order History</h1>
     {gridUser === null ? 
       <table className="table table-striped">
@@ -68,10 +68,34 @@ export default function History(user) {
             <td onClick={() => setGridUser(item)} className="text-info">View Grid</td>
           </tr>)
             : <tr>
-              <td>Fetching Name</td>
-              <td>Fetching Price}</td>
-              <td>Paid / Pending</td>
-              <td>View Grid</td>
+              <td>
+                <img
+                  src={require("../assets/loader.gif")}
+                  alt="loading..."
+                  className="w-25 "
+                />
+              </td>
+              <td>
+                <img
+                  src={require("../assets/loader.gif")}
+                  alt="loading..."
+                  className="w-25"
+                />
+              </td>
+              <td>
+                <img
+                  src={require("../assets/loader.gif")}
+                  alt="loading..."
+                  className="w-25"
+                />
+              </td>
+              <td>
+                <img
+                  src={require("../assets/loader.gif")}
+                  alt="loading..."
+                  className="w-25"
+                />
+              </td>
             </tr>}
         </tbody>
       </table>

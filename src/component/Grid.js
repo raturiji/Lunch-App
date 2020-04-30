@@ -1,6 +1,4 @@
-import React, { useState , useEffect } from "react";
-
-
+import React, { useState, useEffect } from "react";
 
 export default function Grid(user) {
   const [data, setData] = useState(null);
@@ -9,7 +7,7 @@ export default function Grid(user) {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  }, []);
 
   const username = Object.keys(user.user)[0];
 
@@ -25,8 +23,7 @@ export default function Grid(user) {
   };
   console.log(user.user[username]);
   return (
-    <div className="w-75">
-      <h1 className="text-center">{Object.keys(user.user)[0]}</h1>
+    <div className="w-100">
       <table className="table table-striped">
         <thead>
           <tr>
@@ -46,9 +43,27 @@ export default function Grid(user) {
             ))
           ) : (
             <tr>
-              <td>Fetching Name</td>
-              <td>Fetching Data</td>
-              <td>Fetching Price}</td>
+              <td>
+                <img
+                  src={require("../assets/loader.gif")}
+                  alt="loading..."
+                  className="w-25 "
+                />
+              </td>
+              <td>
+                <img
+                  src={require("../assets/loader.gif")}
+                  alt="loading..."
+                  className="w-25"
+                />
+              </td>
+              <td>
+                <img
+                  src={require("../assets/loader.gif")}
+                  alt="loading..."
+                  className="w-25"
+                />
+              </td>
             </tr>
           )}
         </tbody>

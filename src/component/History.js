@@ -1,11 +1,11 @@
 import React , {useState, useEffect} from 'react'
 import firebase from "firebase";
-import Loader from "./Loader"
+
 
 export default function History(user) {
   const [data,setData] = useState(null)
   const [price,setPrice] = useState(0)
-  const [loading,setLoading] = useState(false) 
+
 
   useEffect( () => {
      readUserData();
@@ -13,7 +13,6 @@ export default function History(user) {
   },[])
 
   const readUserData = () => {
-    setLoading(true)
     firebase
       .database()
       .ref("Order/"+ user.user.displayName)
@@ -23,7 +22,7 @@ export default function History(user) {
         for(const property in snapshot.val()){  
               dataArray.push(snapshot.val()[property])
                prices = prices + snapshot.val()[property].Price
-               setLoading(false)
+               
           }
           setPrice(prices)
         setData(dataArray);
@@ -48,10 +47,16 @@ export default function History(user) {
       <td>{item.Date}</td>
       <td>{item.Price}</td>
    </tr>)
-   : loading ? <Loader type="miniLoader" /> : <tr>
-   <td>Fetching Name</td>
-   <td>Fetching Data</td>
-   <td>Fetching Price}</td>
+   : <tr>
+   <td>
+     <img src={require('../assets/loader.gif')} alt="loading..." className= "w-25 " />
+  </td>
+  <td>
+     <img src={require('../assets/loader.gif')} alt="loading..." className= "w-25" />
+  </td>
+  <td>
+     <img src={require('../assets/loader.gif')} alt="loading..." className= "w-25" />
+  </td>
 </tr>}
     </tbody>
   </table>

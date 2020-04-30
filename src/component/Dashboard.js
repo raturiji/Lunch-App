@@ -11,19 +11,20 @@ const Dashboard = ({ user }) => {
   return (
     <div className="Dashboard d-flex align-items-center flex-column justify-content-center">
       <Header src={user && user.photoURL} name={user && user.displayName} onClick={() => firebase.auth().signOut()} />
-      <div className="d-flex my-4">
+      <div className={user==='admin' ? "w-75" : "d-flex my-4" }>
      { (user !== 'admin') ?
      <div>
         <button className=" btn btn-primary mx-3 px-3" onClick={() => setToggle(1)} >Order Lunch</button>
         <button className=" btn btn-primary mx-3 px-3" onClick={() => setToggle(2)} >View History</button>
       </div>
         :
-        <button className=" btn btn-primary mx-3 px-3" onClick={() => setToggle(3)} >Admin Dashboard</button>
+       <AdminDashboard user={user} />
+       
   }
       </div>
       {toggle === 1  ? <Order user={user} /> : null}
       {toggle === 2  ? <History  user={user}/> : null}
-      {toggle === 3  ? <AdminDashboard user={user} /> : null}
+      
     </div>
   );
 };
